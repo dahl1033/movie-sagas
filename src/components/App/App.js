@@ -21,7 +21,7 @@ class App extends Component {
           </Link>
           {/* Routes */}
           <Route path="/" exact>  <Home />  </Route>
-          <Route path="/details">  <Details />  </Route>
+          <Route path="/details" >  <Details />  </Route>
           <Route path="/movieForm">  <NewMovieForm />  </Route>
         </Router>
       </div>
