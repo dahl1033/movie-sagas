@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Grid, Card, Typography } from '@material-ui/core'
+
+import './Home.css';
 // import Grid from '@material-ui/core/Grid'
 // import { CardContent, Divider, Tooltip, Typography } from '@material-ui/core';
 // import Card from '@material-ui/core/Card';
@@ -33,24 +36,20 @@ class Home extends Component {
     render() {
         return(
             <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                Movie
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.movies.map((movie) =>
-                            <tr key={movie.id}>
-                                <td><img onClick={() => this.routeToDetails(movie.id)} src={movie.poster} alt={movie.title}/></td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                <Grid container justify="flex-start" alignItems="center">
+                    <Typography variant="h2" className="allMoviesHeading">All Movies</Typography>
+                        <Grid container justify="flex-start" spacing={2} >
+                            {this.props.movies.map((movie) =>
+                            <>
+                            <Card className="movieCard" key={movie.id}>
+                                    <img onClick={() => this.routeToDetails(movie.id)} src={movie.poster} alt={movie.title}/>
+                            </Card>
+                            </>
+                            )}
+                        </Grid>  
+                </Grid>
                 <br/>
-                <div>
+                {/* <div>
                     
                         {this.props.genres.map((genre) => 
                         <ul>
@@ -63,7 +62,7 @@ class Home extends Component {
                         </ul>
                         )}
                     
-                </div>
+                </div> */}
             </div>
         )
     }

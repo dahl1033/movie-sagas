@@ -1,3 +1,4 @@
+-- movie table for list of movies and description
 CREATE TABLE "movies" (
   "id" SERIAL PRIMARY KEY,
   "title" VARCHAR(120) NOT NULL,
@@ -5,23 +6,14 @@ CREATE TABLE "movies" (
   "description" TEXT NOT NULL
 );
 
--- movies can have multiple genres
+-- genre table for given movie
 CREATE TABLE "genres" (
   "id" SERIAL PRIMARY KEY,
   "name" VARCHAR(80) NOT NULL
 );
 
 
--- CREATE JUNCTION TABLE
--- You will need to create the junction table that stores the relationships between "movies" and "genres"
--- This table will need to be populated with some data as well (INSERTS)
--- Recall that this Junction Table will just be a table of ids!
 
-
-
---------[ DATA! ]---------
-
--- starter movies
 INSERT INTO "movies" ("title", "poster", "description")
 VALUES 
 ('Avatar', 'images/avatar.jpeg', 'Avatar (marketed as James Cameron''s Avatar) is a 2009 American epic science fiction film directed, written, produced, and co-edited by James Cameron, and stars Sam Worthington, Zoe Saldana, Stephen Lang, Michelle Rodriguez, and Sigourney Weaver. The film is set in the mid-22nd century, when humans are colonizing Pandora, a lush habitable moon of a gas giant in the Alpha Centauri star system, in order to mine the mineral unobtanium, a room-temperature superconductor. The expansion of the mining colony threatens the continued existence of a local tribe of Na''vi – a humanoid species indigenous to Pandora. The film''s title refers to a genetically engineered Na''vi body operated from the brain of a remotely located human that is used to interact with the natives of Pandora.'),
@@ -55,3 +47,136 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+-- junction table between genres and movies
+CREATE TABLE "MovieGenres"
+(
+	"id" SERIAL PRIMARY KEY,
+    "Genres_ID" int REFERENCES "genres",
+    "Movies_ID" int REFERENCES "movies"
+);
+
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (1, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (1, 2);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (1, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (1, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (1, 8);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (1, 11);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (2, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (2, 8);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (2, 9);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (3, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (3, 3);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (3, 4);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (3, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (3, 8);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (3, 11);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (3, 13);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (4, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (4, 2);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (4, 4);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (4, 5);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (4, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (4, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (5, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (6, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (6, 4);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (6, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (6, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (6, 8);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (7, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (7, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (7, 13);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (8, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (8, 3);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (8, 5);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (8, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (8, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (8, 8);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (9, 2);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (9, 4);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (9, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (9, 8);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (10, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (10, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (10, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (10, 8);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (10, 11);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (11, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (11, 5);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (11, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (11, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (11, 11);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (12, 3);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (12, 4);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (12, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (13, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (13, 5);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (13, 6);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (13, 7);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (13, 10);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (14, 1);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (14, 2);
+INSERT INTO "MovieGenres" ("Movies_ID", "Genres_ID")
+VALUES (14, 4);

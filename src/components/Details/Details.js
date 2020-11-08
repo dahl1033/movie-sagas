@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Grid, Card, Typography } from '@material-ui/core'
 
 
 class Details extends Component {
@@ -13,14 +14,30 @@ class Details extends Component {
         console.log(`Redux Store: Genres:${this.props.specificGenres} Movie: ${this.props.specificMovie}`)
         return(
             <div>
+                <Grid container justify="flex-start" alignItems="center"> 
+                        <Grid container justify="center" spacing={8} >
+                            <Typography variant="h2" className="allMoviesHeading">{this.props.title}</Typography>
+                            <>
+                            <Card className="movieCard">
+                                <img src={this.props.poster} alt={this.props.title} />
+                                <Grid className="genreList">
+                                    <Typography variant="h6">Genres:</Typography>
+                                {this.props.specificGenres.map((genre) =>
+                                    <Typography variant="subtitle1" className="allMoviesHeading">{genre.name}</Typography>
+                                )}
+                                </Grid>
+                                <Typography variant="subtitle1" className="allMoviesHeading">{this.props.description}</Typography>
+                                <button onClick={() => this.homePage()}>Back</button>
+                            </Card>
+                            </>
+                        </Grid>  
+                </Grid>
                 <div>
-                    <h1>{this.props.title}</h1>
-                    {this.props.specificGenres.map((genre) =>
-                        <h3>{genre.name}</h3>
-                    )}
-                    <img src={this.props.poster} alt={this.props.title} />
-                    <p>{this.props.description}</p>
-                    <button onClick={() => this.homePage()}>Back</button>
+
+                    
+                    
+                    
+                    
                 </div>
             </div>
         )
