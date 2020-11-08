@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Grid, Card, Typography } from '@material-ui/core'
-
 import './Home.css';
-// import Grid from '@material-ui/core/Grid'
-// import { CardContent, Divider, Tooltip, Typography } from '@material-ui/core';
-// import Card from '@material-ui/core/Card';
+
 
 
 class Home extends Component {
