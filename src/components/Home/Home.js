@@ -10,10 +10,15 @@ class Home extends Component {
    // Calls getMovies on load
     componentDidMount() {
         this.getMovies();
+        this.getGenres();
     }
     // Starts FETCH_MOVIES saga to initiate database GET call for movie list
     getMovies = () => {
         this.props.dispatch({type: 'FETCH_MOVIES'})
+    }
+
+    getGenres = () => {
+        this.props.dispatch({type: 'FETCH_GENRES'})
     }
 
     render() {
@@ -35,6 +40,21 @@ class Home extends Component {
                         )}
                     </tbody>
                 </table>
+                <br/>
+                <div>
+                    
+                        {this.props.genres.map((genre) => 
+                        <ul>
+                           <li>{genre.name}</li>
+                            <ul>
+                                {genre["array_agg"].map((elem) =>
+                                            <li>{elem}</li>
+                                )}
+                            </ul>
+                        </ul>
+                        )}
+                    
+                </div>
             </div>
         )
     }
@@ -42,6 +62,7 @@ class Home extends Component {
 
 const mapStateToProps = (reduxState) => ({
     movies: reduxState.movies,
+    genres: reduxState.genres
 });
 
 export default connect(mapStateToProps)(withRouter(Home));
