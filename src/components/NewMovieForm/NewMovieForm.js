@@ -26,8 +26,25 @@ class NewMovieForm extends Component {
             genre: parseInt(event.target.value)
         })
     }
-   
+    // handles save functionality when user saves a new movie
+    onClickSave = () => {
+        console.log('save form button works', this.state)
+        // conditional check to ensure user has inputted all fields before submittion
+        if(this.state.title !== undefined && 
+            this.state.poster !== undefined &&
+            this.state.description !== undefined &&
+            this.state.genre !== undefined
+            ) {
+        // dispatch request to index.js for creating new movie with user input values
+        this.props.dispatch({type: 'CREATE_MOVIES', payload: this.state})
+        // sends user back to home view after new movie is created
+        this.props.history.push('/')
+        } else {
+            alert('You must fill out all input fields to save a movie')
+        }
+    }
 
+    // cancels new movie form and returns to home page
     onClickCancel = () => {
         this.setState(
         {
@@ -36,7 +53,7 @@ class NewMovieForm extends Component {
             description: undefined,
             genre: undefined
         })
-        // kicks user back to home page
+        // sends user back to home page
         this.props.history.push('/')
     }
 

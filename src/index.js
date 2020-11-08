@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_GENRES', fetchGenres);
     yield takeEvery('FETCH_SPECIFIC_GENRES', fetchSpecificMovieGenres);
     yield takeEvery('FETCH_MOVIE_ID', fetchSpecificMovieId);
+    yield takeEvery('CREATE_MOVIES', createMovie);
 }
 
 // Create sagaMiddleware
@@ -85,6 +86,17 @@ function* fetchSpecificMovieId(action) {
         type: 'SET_MOVIE_ID',
         payload: response.data[0]
     })
+}
+
+// Saga used to create new movie
+function* createMovie(action) {
+    yield axios({
+        method: 'POST',
+        url: '/api/movie/',
+        data: action.payload
+    })
+    // grab updated movie list from DB
+    yield put({type: 'FETCH_MOVIES'})
 }
 //
 // *** REDUCERS ***
