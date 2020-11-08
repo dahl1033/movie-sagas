@@ -14,7 +14,23 @@ router.get('/', (req, res) => {
     res.send(result.rows);
   })
   .catch((err) => {
-    console.log('ERROR in genre router', err);
+    console.log(`ERROR in genre router ${err}`);
+    res.sendStatus(500);
+  });
+});
+
+// grab genres from DB by performing a many-many query to get related genres based off movie ID
+router.get('/:id', (req, res) => {
+  pool.query(`SELECT "name" FROM "MovieGenres"
+              JOIN "movies" ON "MovieGenres"."Movies_ID" = "movies"."id"
+              JOIN "genres" ON "MovieGenres"."Genres_ID" = "genres"."id"
+              WHERE "Movies_ID" = $1;`, 
+              [req.params.id])      // $1
+  .then((result) => {
+    res.send(result.rows);
+  })
+  .catch((err) => {
+    console.log(`ERROR in specifics genres router ${err}`);
     res.sendStatus(500);
   });
 });

@@ -4,6 +4,7 @@ import './App.css';
 import { connect } from 'react-redux';
 
 import Home from '../Home/Home';
+import Details from '../Details/Details';
 
 class App extends Component {
   // Renders the entire app on the DOM
@@ -17,6 +18,7 @@ class App extends Component {
 
           {/* Routes */}
           <Route path="/" exact>  <Home />  </Route>
+          <Route path="/details">  <Details />  </Route>
         </Router>
       </div>
     );
