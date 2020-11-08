@@ -7,18 +7,27 @@ import { withRouter } from 'react-router-dom';
 
 
 class Home extends Component {
-   // Calls getMovies on load
+    // on page load run these functions
     componentDidMount() {
         this.getMovies();
         this.getGenres();
     }
-    // Starts FETCH_MOVIES saga to initiate database GET call for movie list
+    // dispatch request to grab movie list from DB
     getMovies = () => {
         this.props.dispatch({type: 'FETCH_MOVIES'})
     }
-
+    // dispatch request to grab genre list from DB with related movies
     getGenres = () => {
         this.props.dispatch({type: 'FETCH_GENRES'})
+    }
+
+    routeToDetails = (value) => {
+        // dispatch call to get movie information from DB for selected movie
+        this.props.dispatch({ type: 'FETCH_MOVIE_ID', payload: value})
+        // dispatch call to get genres of selected movie
+        this.props.dispatch({type: 'FETCH_SPECIFIC_GENRES', payload: value})
+        // routes user to details view
+        this.props.history.push(`/details`)
     }
 
     render() {
@@ -35,7 +44,7 @@ class Home extends Component {
                     <tbody>
                         {this.props.movies.map((movie) =>
                             <tr key={movie.id}>
-                                <td>{movie.title}</td>
+                                <td><img onClick={() => this.routeToDetails(movie.id)} src={movie.poster} alt={movie.title}/></td>
                             </tr>
                         )}
                     </tbody>

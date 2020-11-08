@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
-
+// grab all the movies in movies table in DB
 router.get('/', (req, res) => {
   pool.query(`SELECT * FROM "movies"
               ORDER BY "title" ASC;`)
@@ -10,7 +10,20 @@ router.get('/', (req, res) => {
     res.send(result.rows);
   })
   .catch((err) => {
-    console.log('ERROR in movie router', err)
+    console.log(`ERROR in movie router ${err}`)
+    res.sendStatus(500);
+  });
+})
+
+// grab movie info from movies table in DB based on specific movie ID
+router.get('/:id', (req, res) => {
+  pool.query(`SELECT * FROM "movies" WHERE id=$1;`, 
+    [req.params.id])      // $1
+  .then((result) => {
+    res.send(result.rows);
+  })
+  .catch((err) => {
+    console.log(`ERROR in movie ID router ${err}`)
     res.sendStatus(500);
   });
 })
